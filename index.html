@@ -21,7 +21,7 @@
       border-radius: 10px;
     }
 
-    h1 {
+    h2 {
       margin-top: 0;
       font-size: 2rem;
       color: #333;
@@ -32,8 +32,8 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
+      align-items: center;
       margin-top: 20px;
-      position: relative;
     }
 
     .dhikr-item {
@@ -42,7 +42,7 @@
       background-color: #f9f9f9;
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      width: 45%;
+      width: calc(50% - 20px); /* Adjusted width for desktop */
       box-sizing: border-box;
     }
 
@@ -60,16 +60,13 @@
     }
 
     .image-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       width: 200px; /* Increased size */
       height: 200px; /* Increased size */
       border-radius: 50%;
       overflow: hidden;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       border: 2px solid black; /* Thinner black border */
+      margin: 20px auto; /* Center the image */
     }
 
     .image-container img {
@@ -114,7 +111,7 @@
         width: 100%;
       }
       
-      h1 {
+      h2 {
         font-size: 1.5rem;
       }
 
