@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>موقع صدقة جارية للمتوفى</title>
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      background-color: #f5f5f5;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 2rem;
+      color: #333;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .dhikr-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    .dhikr-item {
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      width: 45%;
+      box-sizing: border-box;
+    }
+
+    .dhikr-item h2 {
+      font-size: 1.5rem;
+      color: #007bff;
+      margin-top: 0;
+    }
+
+    .dhikr-count {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .image-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px; /* Increased size */
+      height: 200px; /* Increased size */
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border: 2px solid black; /* Thinner black border */
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      font-size: 1rem;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .reset-button {
+      background-color: #dc3545;
+    }
+
+    .reset-button:hover {
+      background-color: #c82333;
+    }
+
+    .visitor-counter {
+      margin-top: 20px;
+      font-size: 1rem;
+      color: #555;
+      display: none; /* Initially hide the counter */
+    }
+
+    @media (max-width: 600px) {
+      .dhikr-item {
+        width: 100%;
+      }
+      
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .dhikr-item h2 {
+        font-size: 1.25rem;
+      }
+
+      .dhikr-count {
+        font-size: 1.5rem;
+      }
+
+      button {
+        font-size: 0.875rem;
+        padding: 6px 12px;
+      }
+
+      .visitor-counter {
+        font-size: 0.875rem;
+      }
+
+      .image-container {
+        width: 150px; /* Adjusted size for mobile */
+        height: 150px; /* Adjusted size for mobile */
+      }
+    }
+
+    .prayer-note {
+      margin-top: 20px;
+      font-size: 1.25rem;
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h2>صدقة جارية على روح الدكتور أحمد سعيد جادالله رحمه الله</h2>
+    
+    <div class="dhikr-container">
+      <div class="dhikr-item">
+        <h2>الحمد لله</h2>
+        <div class="dhikr-count" id="dhikr1-count">0</div>
+        <button onclick="incrementDhikr('dhikr1-count')">أذكر</button>
+      </div>
+      
+      <div class="dhikr-item">
+        <h2>سبحان الله</h2>
+        <div class="dhikr-count" id="dhikr2-count">0</div>
+        <button onclick="incrementDhikr('dhikr2-count')">أذكر</button>
+      </div>
+      
+      <div class="image-container">
+        <img src="1721006268440.jpg" alt="صورة المتوفى">
+      </div>
+      
+      <div class="dhikr-item">
+        <h2>لا إله إلا الله</h2>
+        <div class="dhikr-count" id="dhikr3-count">0</div>
+        <button onclick="incrementDhikr('dhikr3-count')">أذكر</button>
+      </div>
+      
+      <div class="dhikr-item">
+        <h2>الله أكبر</h2>
+        <div class="dhikr-count" id="dhikr4-count">0</div>
+        <button onclick="incrementDhikr('dhikr4-count')">أذكر</button>
+      </div>
+    </div>
+    
+    <div class="prayer-note">إذا أتممت الأذكار فصلى على رسول الله صلى الله عليه وسلم</div><br>
+    
+    <button class="reset-button" onclick="resetCounts()">إبدأ من البداية</button>
+    
+    <div class="visitor-counter" id="visitor-counter">
+      عدد الزوار: <span id="visit-count">0</span>
+    </div>
+  </div>
+  
+  <script>
+    let visitCount = localStorage.getItem('visitCount') || 0;
+    visitCount++;
+    localStorage.setItem('visitCount', visitCount);
+    document.getElementById('visit-count').textContent = visitCount;
+
+    function incrementDhikr(id) {
+      var countElement = document.getElementById(id);
+      var currentCount = parseInt(countElement.textContent);
+      countElement.textContent = currentCount + 1;
+    }
+
+    function resetCounts() {
+      var countElements = document.getElementsByClassName("dhikr-count");
+      for (var i = 0; i < countElements.length; i++) {
+        countElements[i].textContent = "0";
+      }
+    }
+
+    // Show visitor count only if accessed from localhost
+    if (window.location.hostname === 'localhost') {
+      document.getElementById('visitor-counter').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
